@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Patient</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="header">HOSPITAL MANAGEMENT SYSTEM</div>
+    <div class="nav"><a href="/">Home</a> <a href="/create">Add Patient</a></div>
+    <h2>Edit Patient Record</h2>
+    <form action="/update_patient/{{ patient[0] }}" method="post">
+        <input type="text" name="name" placeholder="Patient Name" value="{{ patient[1] }}" required><br>
+        <input type="number" name="age" placeholder="Age" value="{{ patient[2] }}" required min="0" max="120"><br>
+        <select name="gender" required>
+            <option value="">Select Gender</option>
+            <option value="male" {% if patient[3] == 'male' %}selected{% endif %}>Male</option>
+            <option value="female" {% if patient[3] == 'female' %}selected{% endif %}>Female</option>
+            <option value="other" {% if patient[3] == 'other' %}selected{% endif %}>Other</option>
+        </select><br>
+        <input type="tel" name="contact" placeholder="Contact Number" value="{{ patient[4] }}" required pattern="[0-9]{10}"><br>
+        <textarea name="address" placeholder="Address" required>{{ patient[5] }}</textarea><br>
+        <textarea name="medical_condition" placeholder="Medical Condition" required>{{ patient[6] }}</textarea><br>
+        <button type="submit">Update Patient</button>
+    </form>
+</body>
+</html> 

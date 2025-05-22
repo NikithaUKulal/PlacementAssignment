@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${user.id > 0} ? 'Edit User' : 'Create User'">Create User</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.min.css">
+    <style>
+        .header { background: #84bff5; color: #fff; padding: 20px; text-align: center; font-size: 2em; font-weight: bold; }
+        .container { margin-top: 40px; max-width: 600px; }
+        .btn { background: #84bff5; color: #fff; border: none; padding: 8px 16px; border-radius: 4px; text-decoration: none; }
+    </style>
+</head>
+<body>
+<div class="header">USER-CRUD</div>
+<div class="container">
+    <div style="display: flex; justify-content: flex-end; gap: 10px; margin-bottom: 10px;">
+        <a href="/users" class="btn" style="background:#333;">Home</a>
+        <a href="/users/create" class="btn">Create</a>
+    </div>
+    <h2 th:text="${user.id > 0} ? 'Edit User' : 'Create User'">Create User</h2>
+    <form th:action="${user.id > 0} ? @{'/users/update'} : @{'/users/save'}" th:object="${user}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        <label>Your name <span style="color:red">*</span></label>
+        <input type="text" th:field="*{name}" required />
+        <label>Your Email <span style="color:red">*</span></label>
+        <input type="email" th:field="*{email}" required />
+        <label>Your Mobile</label>
+        <input type="text" th:field="*{mobile}" />
+        <label>Your Gender</label>
+        <select th:field="*{gender}">
+            <option value="">Choose Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+        </select>
+        <label>Your Address</label>
+        <textarea th:field="*{address}"></textarea>
+        <button type="submit" class="btn" th:text="${user.id > 0} ? 'Update user' : 'Add new user'">Add new user</button>
+        <a href="/users" class="btn" style="background:#333;">Cancel</a>
+    </form>
+</div>
+</body>
+</html> 

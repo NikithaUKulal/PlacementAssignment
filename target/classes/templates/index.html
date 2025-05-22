@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.min.css">
+    <style>
+        .header { background: #84bff5; color: #fff; padding: 20px; text-align: center; font-size: 2em; font-weight: bold; }
+        .actions a { margin-right: 8px; }
+        .container { margin-top: 40px; }
+        .btn { background: #84bff5; color: #fff; border: none; padding: 8px 16px; border-radius: 4px; text-decoration: none; }
+        .btn-danger { background: #e74c3c; }
+    </style>
+</head>
+<body>
+<div class="header">USER-CRUD</div>
+<div class="container">
+    <div style="display: flex; justify-content: flex-end; gap: 10px; margin-bottom: 10px;">
+        <a href="/users" class="btn" style="background:#333;">Home</a>
+        <a href="/users/create" class="btn">Create</a>
+    </div>
+    <h2>Users</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>Gender</th>
+                <th>Address</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.name}"></td>
+                <td th:text="${user.email}"></td>
+                <td th:text="${user.mobile}"></td>
+                <td th:text="${user.gender}"></td>
+                <td th:text="${user.address}"></td>
+                <td class="actions">
+                    <a th:href="@{'/users/edit/' + ${user.id}}" class="btn">Edit</a>
+                    <a th:href="@{'/users/delete/' + ${user.id}}" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html> 
